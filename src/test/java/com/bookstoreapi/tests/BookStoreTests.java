@@ -41,6 +41,7 @@ public class BookStoreTests {
     @Test
     void getBooksTest() {
         given()
+                .params("ISBN", "9781449325862")//
                 .log().all()
                 .when()
                 .get("/BookStore/v1/Books")
