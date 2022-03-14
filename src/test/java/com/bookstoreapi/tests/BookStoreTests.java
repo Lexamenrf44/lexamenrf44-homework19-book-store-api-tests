@@ -24,7 +24,7 @@ public class BookStoreTests {
     }
 
     @Test
-    void getBookTest() {
+    void getUnavailableBookTest() {
         given()
                 .params("ISBN", "978144932586288")//
                 .log().uri()
@@ -39,6 +39,24 @@ public class BookStoreTests {
     }
 
     @Test
+    void getAvailableBookTest() {
+        given()
+                .params("ISBN", "9781449325862")//
+                .log().uri()
+                .log().body()
+                .when()
+                .get("/BookStore/v1/Book")
+                .then()
+                .log().status()
+                .log().body()
+                .statusCode(200)
+                .body("title", is("Git Pocket Guide"))
+                .body("description", is("This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. " +
+                        "It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git exp"))
+                .body("website", is("http://chimera.labs.oreilly.com/books/1230000000561/index.html"));
+    }
+
+    @Test
     void getBooksTest() {
         given()
                 .log().all()
@@ -47,7 +65,8 @@ public class BookStoreTests {
                 .then()
                 .log().all()
                 .body("books", hasSize(greaterThan(0)))
-                .body("books.title[0]", is("Git Pocket Guide"));
+                .body("books.isbn[1]", is("9781449331818"))
+                .body("books.title[2]", is("Designing Evolvable Web APIs with ASP.NET"));
     }
 
 }
