@@ -96,7 +96,6 @@ public class BookStoreTests {
                 .body("token.size()", greaterThan(10));
     }
 
-    @Disabled
     @Test
     void generateTokenWithCustomAllureListenerTest() {
         String data = "{ \"userName\": \"alex\", " +
@@ -114,7 +113,6 @@ public class BookStoreTests {
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body(matchesJsonSchemaInClasspath("shemas/generateToken_response_shema.json"))
                 .body("status", is("Success"))
                 .body("result", is("User authorized successfully."))
                 .body("token.size()", greaterThan(10));
