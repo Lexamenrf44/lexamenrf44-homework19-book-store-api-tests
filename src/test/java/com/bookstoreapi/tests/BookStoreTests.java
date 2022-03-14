@@ -19,13 +19,13 @@ public class BookStoreTests {
     @BeforeAll
     static void setup() {
         RestAssured.baseURI = "https://demoqa.com";
+        RestAssured.filters(withCustomTemplates());
 
     }
 
     @Test
     void getBookTest() {
         given()
-                .filter(withCustomTemplates())
                 .params("ISBN", "978144932586288")//
                 .log().uri()
                 .log().body()
@@ -41,7 +41,6 @@ public class BookStoreTests {
     @Test
     void getBooksTest() {
         given()
-                .filter(withCustomTemplates())
                 .log().all()
                 .when()
                 .get("/BookStore/v1/Books")
