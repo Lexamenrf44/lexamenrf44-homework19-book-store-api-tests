@@ -3,6 +3,7 @@ package com.bookstoreapi.tests;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.bookstoreapi.helpers.CustomAllureListener.withCustomTemplates;
@@ -95,6 +96,7 @@ public class BookStoreTests {
                 .body("token.size()", greaterThan(10));
     }
 
+    @Disabled
     @Test
     void generateTokenWithCustomAllureListenerTest() {
         String data = "{ \"userName\": \"alex\", " +
